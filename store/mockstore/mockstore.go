@@ -14,6 +14,7 @@
 package mockstore
 
 import (
+	"github.com/pingcap/tidb/util/logutil"
 	"net/url"
 	"strings"
 
@@ -151,6 +152,8 @@ func NewMockStore(options ...MockTiKVStoreOption) (kv.Storage, error) {
 	for _, f := range options {
 		f(&opt)
 	}
+
+	logutil.BgLogger().Info("Use IPFS store")
 
 	switch opt.storeType {
 	case MockTiKV:
